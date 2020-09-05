@@ -100,7 +100,7 @@ at zero, when positive, moves left (right) and when
 negative, moves right (left).
 
 
-# How to Generate PPM Signal:
+## How to Generate PPM Signal:
 Generation of PPM is easier if we previously generate PWM for the message signal. Firstly, we
 need to define the rectangular pulse (say p(t)) which will be used for PPM signaling. Then we have
 to check for the negative edges (NE) of the already generated PWM signal. Let the information of
