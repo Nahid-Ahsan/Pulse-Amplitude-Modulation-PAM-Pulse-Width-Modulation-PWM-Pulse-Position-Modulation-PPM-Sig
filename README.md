@@ -42,7 +42,7 @@ can be done via simple switching on the way of the message flow. But as the puls
 height has a time varying shape, the regeneration & error correction of this PAM signal
 are quite complex than the flat topped one.
 
-![]alt text](https://github.com/Nahid-Ahsan/Pulse-Amplitude-Modulation-PAM-Pulse-Width-Modulation-PWM-Pulse-Position-Modulation-PPM-Sig/blob/master/PAM.png)
+![alt text](https://github.com/Nahid-Ahsan/Pulse-Amplitude-Modulation-PAM-Pulse-Width-Modulation-PWM-Pulse-Position-Modulation-PPM-Sig/blob/master/PAM.png)
 
 
 # Pulse Width Modulation (PWM):
@@ -74,3 +74,42 @@ the needed duty cycle. PWM has also been used in certain communication systems w
 cycle has been used to convey information over a communications channel.
 
 
+## How to generate PWM Signals:
+Firstly, we need a sawtooth reference signal. Then compare the message signal with the sawtooth
+signal using a comparator (i.e. op-amp w/o feedback), if the message value is higher, output
+continuous pulse, as soon as message becomes lower than reference, output zeros. This is will
+create a PWM output pulses for the message signal. 
+
+![](https://github.com/Nahid-Ahsan/Pulse-Amplitude-Modulation-PAM-Pulse-Width-Modulation-PWM-Pulse-Position-Modulation-PPM-Sig/blob/master/PWM.png)
+
+
+
+# Pulse Position Modulation (PPM):
+Message is encoded into the pulse position. The
+pulse position at null (when message is at
+null/minima) is called the reference position. When
+the message has some values, the pulse position
+moves either left or right extend proportional to the
+message signal value at that sampling instant.
+
+PPM can be of unidirectional & bidirectional.
+Unidirectional PPM has reference at the minima
+and moves left (or right) as the signal grows from
+the minima. Bidirectional PPM signal has reference
+at zero, when positive, moves left (right) and when
+negative, moves right (left).
+
+
+# How to Generate PPM Signal:
+Generation of PPM is easier if we previously generate PWM for the message signal. Firstly, we
+need to define the rectangular pulse (say p(t)) which will be used for PPM signaling. Then we have
+to check for the negative edges (NE) of the already generated PWM signal. Let the information of
+where the negative edges are, be stored as a signal which is denoted by q(t). This q(t) is an impulse
+at the NE points, and zero otherwise. So now, the half-period-shifted convolution of p(t) and q(t)
+(i.e. p(t-T/2)*q(t)) yields the desired PPM Signal. In easier language, we have to put the left edge
+of the pulse p(t) at the position the impulses of q(t).
+The method of PWM’s negative edge detection can be electronically realized by setting an inverted
+differentiator in series with a HW-rectifier. Then passing the outcome of the rectifier through a
+filter of impulse response h(t) = p(t-T/2) will yield the PPM signal as output. (Think why it is so?)
+
+![](https://github.com/Nahid-Ahsan/Pulse-Amplitude-Modulation-PAM-Pulse-Width-Modulation-PWM-Pulse-Position-Modulation-PPM-Sig/blob/master/PWM.png)
